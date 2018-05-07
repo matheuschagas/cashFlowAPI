@@ -25,8 +25,9 @@ exports.authenticate = async (username, password) => {
     let response = {};
     if(user){
         let todayTimestamp = (new Date()).getTime();
+        let permission = await db.get('select', 'userType', {}, {id: user.userType});
         response.success = true;
-        response.permissions = user.permissions;
+        response.permissions = permission.permissions;
         response.token = hash(user.username + user.password + todayTimestamp);
         db.set('update', 'user', {token: response.token}, {id: user.id});
     }else{
