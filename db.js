@@ -59,7 +59,7 @@ const createDatabase = () => {
                 "  description text NOT NULL,\n" +
                 "  amount float NOT NULL,\n" +
                 "  paymentType int(11) NOT NULL,\n" +
-                "  transactionDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
+                    "  transactionDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
                 "  user int(11) NOT NULL,\n" +
                 "  FOREIGN KEY (paymentType) REFERENCES paymentType (id),\n" +
                 "  FOREIGN KEY (user) REFERENCES user (id)\n" +
@@ -223,11 +223,6 @@ exports.populateDatabase =  async () => {
 };
 
 
-exports.save = function (transaction, cb){
-
-
-};
-
 exports.get = (action, target, params, filter) => {
     const sql = createQuery(action, target, params, filter);
     return new Promise((resolve)=>{
@@ -285,4 +280,18 @@ exports.fetchAll = (action, target, params, filter) => {
         });
     });
 };
+
+exports.query = (query) => {
+    return new Promise((resolve)=>{
+        db.all(query, [], (err, rows)=>{
+            if(err){
+                resolve(false);
+            }else{
+                console.log(rows);
+                resolve(rows);
+            }
+        });
+    });
+};
+
 

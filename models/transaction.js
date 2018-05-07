@@ -25,3 +25,10 @@ exports.listAll = async () => {
     let transacions = await db.fetchAll('select', 'transact', {}, {});
     return transacions;
 };
+
+exports.dashboardInfo = async () => {
+    let transacions = await db.query('SELECT \n' +
+        '(SELECT sum(amount) FROM transact WHERE transactionDate BETWEEN (NOW() - INTERVAL 1 MONTH ) AND NOW())\n' +
+        '(SELECT sum(amount) FROM transact WHERE transactionDate >= CURDATE())');
+    return transacions;
+};

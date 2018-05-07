@@ -75,6 +75,15 @@ router.patch('/', async (req, res, next) => {
 
 
 /* DELETE transaction. */
+router.get('/dashboard', async (req, res, next) => {
+    let token = req.param("token");
+    if(token && await user.checkTokenAndPermission(token, "transaction", 1)){
+        res.send(await transaction.dashboardInfo());
+    }else{
+        res.send(403);
+    }
+});
+
 router.delete('/', async (req, res, next) => {
     let token = req.param("token");
     let id = req.param("id");
