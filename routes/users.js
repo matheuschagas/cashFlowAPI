@@ -3,9 +3,6 @@ let router = express.Router();
 let user = require('../models/user');
 
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
-    res.send(await user.listAll());
-});
 
 router.get('/auth', async (req, res, next) => {
   let username = req.param("username");
