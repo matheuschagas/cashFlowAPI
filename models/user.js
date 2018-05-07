@@ -48,6 +48,9 @@ exports.checkTokenAndPermission = async (token, feature, level) => {
     return allowAccess;
 };
 
-exports.listAll = async () => {
-  return await db.fetchAll('select', 'user', {}, {});
+
+
+exports.userInfo = async (token) => {
+    const user = await db.fetchAll('select', 'user', {}, {token});
+    return user;
 };

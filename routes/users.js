@@ -14,4 +14,14 @@ router.get('/auth', async (req, res, next) => {
   }
 });
 
+router.get('/info', async (req, res, next) => {
+    let token = req.param("token");
+    if(token !== undefined){
+        res.send(await user.userInfo(token));
+    }else{
+        res.send(403);
+    }
+});
+
+
 module.exports = router;
