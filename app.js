@@ -1,4 +1,5 @@
 let express = require('express');
+var cors = require('cors')
 let path = require('path');
 let favicon = require('serve-favicon');
 let logger = require('morgan');
@@ -13,6 +14,8 @@ let transactions = require('./routes/transactions');
 let paymentTypes = require('./routes/paymentTypes');
 
 let app = express();
+
+app.use(cors());
 
 db.populateDatabase();
 
