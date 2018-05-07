@@ -27,8 +27,8 @@ exports.listAll = async () => {
 };
 
 exports.dashboardInfo = async () => {
-    let transacions = await db.query('SELECT'+
-    "(SELECT sum(amount) FROM transact WHERE transactionDate BETWEEN date(CURRENT_TIMESTAMP, '-1 MONTH' ) AND CURRENT_TIMESTAMP),"+
-    "(SELECT sum(amount) FROM a WHERE `date` BETWEEN date(CURRENT_TIMESTAMP, '-1 day' ) AND CURRENT_TIMESTAMP)')";
+    let transacions = await db.query("SELECT \n" +
+        "(SELECT sum(amount) FROM transact WHERE transactionDate BETWEEN date(CURRENT_TIMESTAMP, '-1 MONTH' ) AND CURRENT_TIMESTAMP),\n" +
+        "(SELECT sum(amount) FROM a WHERE `date` BETWEEN date(CURRENT_TIMESTAMP, '-1 day' ) AND CURRENT_TIMESTAMP)");
     return transacions;
 };
