@@ -26,6 +26,7 @@ exports.authenticate = async (username, password) => {
     if(user){
         let todayTimestamp = (new Date()).getTime();
         response.success = true;
+        response.permissions = user.permissions;
         response.token = hash(user.username + user.password + todayTimestamp);
         db.set('update', 'user', {token: response.token}, {id: user.id});
     }else{
@@ -46,11 +47,4 @@ exports.checkTokenAndPermission = async (token, feature, level) => {
 
     }
     return allowAccess;
-};
-
-
-
-exports.userInfo = async (token) => {
-    const user = await db.fetchAll('select', 'user', {}, {token});
-    return user;
 };
