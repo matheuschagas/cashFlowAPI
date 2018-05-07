@@ -1,3 +1,4 @@
 # cashFlowAPI
-* this is an API to cashflow angular app
-* It's runing on heroku
+* It's an ExpressJS app
+* It's an API to cashflow angular app
+* It's runing on heroku at https://cashflowapi.herokuapp.com/
